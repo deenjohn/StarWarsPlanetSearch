@@ -1,6 +1,6 @@
 import React from 'react'
 import Loader  from "./Loader";
-import SearchResultCSS from "./searchResult.css"
+import SearchResultCSS from "./SearchResult.css"
 
 var fontSize = 26;
 var count = 0 ;
