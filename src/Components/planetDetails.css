@@ -1,0 +1,45 @@
+.planet-details {
+    position: relative;
+    right: 0;
+    left: 0;
+    width: 70%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 10px;
+    border: solid 3px;
+    border-radius: 5px;
+    margin-top: 2%;
+  }
+  
+  .planet-details__clear {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    cursor: pointer;
+    font-weight: 800;
+  }
+  
+  .planet-details__header {
+    margin: 0;
+  }
+  
+  .planet-details__sections {
+    display: inline-block;
+    width: 48%;
+    padding: 10px 1%;
+    vertical-align: top;
+    text-transform: capitalize;
+  }
+  
+  .planet-details__detail {
+    padding: 4px;
+  }
+  
+  @media (max-width: 400px) {
+    .planet-details {
+      max-width: 100%;
+    }
+    .planet-details__sections {
+      width: 100%;
+    }
+  }
