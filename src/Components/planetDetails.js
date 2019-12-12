@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import planetDetailsCSS from './PlanetDetails.css'
+import planetDetailsCSS from './planetDetails.css'
 
 const PlanetDetails = ({ planet =[], onClose }) => (
   <section className="planet-details">
