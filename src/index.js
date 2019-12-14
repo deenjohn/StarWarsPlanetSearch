@@ -24,13 +24,13 @@ export default function App(props) {
           <ul>
             {props.isAuthenticated ? 
             <li>
-              <NavLink  to="/logout">Logout</NavLink>
+              <NavLink  to="/logout" exact activeClassName="active">Logout</NavLink>
             </li> :
             <li>
-              <NavLink  to="/">Login</NavLink>
+              <NavLink  to="/" exact  activeClassName="active">Login</NavLink>
             </li>}
             <li>
-              <NavLink  to="/search" activeClassName="active">Search</NavLink>
+              <NavLink  to="/search" exact activeClassName="active">Search</NavLink>
             </li>
           </ul>
   
