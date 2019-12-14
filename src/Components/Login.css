@@ -59,6 +59,12 @@ input[name=uname], input[type=password] {
     width: 40%; /* Could be more or less, depending on screen size */
   }
   
+ @media screen and (max-width: 1020px) {
+    .login-content {
+      width : 90%
+    }
+  }
+  
   
   /* Add Zoom Animation */
   .animate {
