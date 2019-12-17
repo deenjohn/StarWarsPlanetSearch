@@ -19,10 +19,8 @@ class Login extends React.Component{
         this.state = {
             uname : EMPTY,
             password :EMPTY,
-            errors: {
-              uname: EMPTY,
-              psw: EMPTY,
-            },
+            errors_uname:EMPTY,
+            errors_psw :EMPTY,
             formInvalid : true,
             DOB : null
           };
@@ -35,29 +33,35 @@ class Login extends React.Component{
 
     async handleUserNameInput(event) {
         event.preventDefault();
-        let errors = this.state.errors;
+        let errors_uname =EMPTY;
+        let errors_psw = EMPTY ;
         const {value} = event.target ;
         var userExist = await isValidLogin(event.target.value);
         if(!userExist[0]){
-            errors.uname = USERINPUT_ERROR 
+          errors_uname = USERINPUT_ERROR ;
+          errors_psw = PASSWORD_ERROR ;
         }else{
-            errors.uname = EMPTY
+          errors_uname = EMPTY ;
+          errors_psw = PASSWORD_ERROR;
+
         }
-        this.setState({errors ,uname :value, DOB : userExist[1]});
-        ;
+
+        this.setState({uname :value, DOB : userExist[1],errors_uname,errors_psw });
+        
       }
-    
+
+
       handlePasswordInput(event) {
         event.preventDefault();
-        let errors = this.state.errors; 
+        let errors_psw ;
         const {value} = event.target ;  
         let res = (value === this.state.DOB );    
-        errors.psw = 
-              !res
+        errors_psw = 
+              res === false 
                 ? PASSWORD_ERROR
                 : EMPTY;
     
-        this.setState({errors,password :value});
+        this.setState({errors_psw,password :value});
         
       }
     
@@ -68,7 +72,9 @@ class Login extends React.Component{
           return ;
         }
       
-        if(!(this.state.errors.uname && this.state.errors.psw) ) { 
+        if(this.state.errors_uname === EMPTY && this.state.errors_psw === EMPTY ) {
+
+          let res = (this.state.errors_uname === EMPTY && this.state.errors_psw == EMPTY)
           this.props.dispatch(authenticate(true))  ;
           this.props.history.push("/search")
 
@@ -77,7 +83,7 @@ class Login extends React.Component{
 
     
      render(){
-        const { errors } = this.state;
+        const { errors_psw , errors_uname } = this.state;
          if(this.props.isAuthenticated){
             return <Logout />
          }
@@ -86,14 +92,14 @@ class Login extends React.Component{
               <div className="container">
                     <label htmlFor="uname"><b>Username</b></label>
                     <input type="text" placeholder="Enter Username" name="uname" onBlur={this.handleUserNameInput} />
-                    {errors.uname.length > 0 && (
-                      <span className="error">{errors.uname}</span>
+                    {errors_uname !== EMPTY && (
+                      <span className="error">{errors_uname}</span>
                     )}
                     <br></br>
                     <label htmlFor="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" onChange={this.handlePasswordInput} />
-                    {errors.psw.length > 0 && (
-                        <span className="error">{errors.psw}</span>
+                    <input type="password" placeholder="Enter Password" name="psw" onKeyUp={this.handlePasswordInput} />
+                    {errors_psw !==EMPTY  && (
+                        <span className="error">{errors_psw}</span>
                      )}
                        <br></br> 
                     <button type="submit" >Login</button>
